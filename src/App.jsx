@@ -12,6 +12,8 @@ function App() {
     confirmation: false
   })
 
+  const [isError, setError] = useState('')
+
   function handleInputChange(e) {
     const { name, type, checked, value } = e.target
 
@@ -20,13 +22,27 @@ function App() {
       [name]: type === "checkbox" ? checked : value
     })
 
-    console.log([name], value, form)
+    setError('')
   }
 
   function handleBtnClick() {
-    if(!form.confirmation || form.passwordRepeat !== form.password) {
+    if (!form.name || !form.surname || !form.phone || !form.email || !form.password || !form.passwordRepeat) {
+      setError('Пожалуйста, заполните все поля')
       return
     }
+
+    if(form.passwordRepeat !== form.password) {
+      setError('Пароли не совпадают')
+      return
+    }
+
+    if(!form.confirmation) {
+      setError('Подтвердите пароль')
+      return
+    }
+
+    setError('')
+
     alert(`
       Имя: ${form.name}
       Фамилия: ${form.surname}
@@ -85,7 +101,12 @@ function App() {
         Подтверждаю пароль
       </label>
 
-      <button className='button' onClick={handleBtnClick}>Продолжить</button>
+      
+
+      <div className='button-and-error'>
+        <button className='button' onClick={handleBtnClick}>Продолжить</button>
+        {isError && <p className='error'>{isError}</p>}
+      </div>
 
       <div className="link-wrapper">
         <p className='text'>Уже есть аккаунт ? <a className='link' target="_blank" href="https://youtu.be/dQw4w9WgXcQ?si=lNVNHsa0xBkHeOLS'">Войти <img src={arrow} alt="" /></a></p>

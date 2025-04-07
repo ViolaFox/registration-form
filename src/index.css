@@ -102,8 +102,14 @@ body {
   transform: translate(-50%, -50%);
 }
 
-.button {
+.button-and-error {
   margin: 50px 0;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.button {
   width: 200px;
   height: 48px;
   border-radius: 4px;
@@ -120,6 +126,10 @@ body {
   background-color: transparent;
   border: 1px solid rgb(75, 114, 194);
   color: rgb(75, 114, 194);
+}
+
+.error {
+  color: rgb(255, 0, 0);
 }
 
 .link-wrapper {
